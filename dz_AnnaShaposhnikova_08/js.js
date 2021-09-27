@@ -16,7 +16,12 @@ function onClick(){
   } 
   let ul = document.querySelector('.ul-container');
   const liElement = document.createElement('li');
-  liElement.textContent = textInputEl.value; 
+  const textInput = textInputEl.value;
+  const trimTextInput = textInput.trim();
+  if(!trimTextInput){
+    return;
+  }  
+  liElement.textContent = trimTextInput; 
   ul.append(liElement);
   textInputEl.value ='';
 }
