@@ -1,0 +1,32 @@
+.inline-block{
+    display: inline;    
+}
+
+.font20{
+    font-size: 20px;
+}
+
+.border,table td{
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+#phoneBook{
+    position: relative;  
+    width: 500px;
+    height: 500px;  
+    overflow: auto;
+}
+
+table{
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    min-width: 100%;
+    
+    margin-top: 20px;
+}
+
+

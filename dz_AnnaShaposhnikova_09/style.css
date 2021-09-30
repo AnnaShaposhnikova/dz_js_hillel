@@ -1,0 +1,40 @@
+.inline-block{
+    display: inline;    
+}
+
+.font20{
+    font-size: 20px;
+}
+
+.border,table td{
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+#phoneBook{
+    /* position: relative;   */
+    width: 500px;
+    height: 500px;  
+    overflow: auto;
+}
+
+table{
+    /* position: absolute; */
+    width: 100%;
+    max-width: 500px;
+    min-width: 100%;
+    
+    margin-top: 20px;
+}
+
+#div1, #div2, #div3{
+    /* position: relative; */
+}
+
+#msgFirstName, #msgLastName, #msgPhone{
+    /* position: absolute;  */
+    color: red;
+    font-size: 8 px;
+}

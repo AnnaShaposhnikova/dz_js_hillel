@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DZ_09_div</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="inline-block" id="div1">
+          <input
+            type="text"
+            id="input-first-name"
+            class="font20"
+            name="input-text"
+            placeholder="enter your first name"        
+         />
+         <div id="msgFirstName"></div>
+    </div>
+
+    <div class="inline-block" id="div2">
+        <input
+            type="text"
+            id="input-last-name"
+            class="font20"
+            name="input-text" 
+            placeholder="enter your last name"          
+        />
+        <div id="msgLastName"></div>
+    </div>  
+    
+    <div class="inline-block" id="div3">
+        <input
+            type="text"
+            id="input-phone"
+            class="font20"
+            name="input-text"
+            placeholder="enter your phone number"
+        />
+        <div id="msgPhone"></div>
+    </div>  
+
+    <button id="btn" class="inline-block font20">Add</button>    
+    <div id='phoneBook'> 
+          <table class = "font20 border">
+           <thead class = "border">
+               <tr>
+                   <th  class = "border">First Name</th><th class = "border">Last Name</th><th class = "border">Phone number</th>
+               </tr>
+           </thead>
+           <tbody>
+         
+           </tbody>
+       </table>  
+    </div>
+      
+
+    <script src="js.js"></script>
+</body>
+</html>
