@@ -1,0 +1,49 @@
+.font20{
+    font-size: 20px;
+}
+  input {
+    border: 1px solid black;
+    width: 40%;
+    height: 1.5em;
+    border-radius: 5px;
+    padding-left: 7px;
+  }
+
+  #btn {
+    width: 150px;    
+    border-radius: 10px;
+  }
+  #todo-list-table{
+    width: 40.5%; 
+    height: 300px;
+    margin-top: 10px;
+    overflow:auto;
+    border: 1px solid black;  
+  }
+
+  .item {    
+    height: 10%;
+    padding-top: 15px;
+    padding-bottom: 15px;    
+    border: 1px solid black;
+    position: relative;    
+  }
+  
+  .yellow{
+      background-color: yellow     
+  }
+
+  .green{
+      background-color: green;
+  }
+
+  .delete{    
+      border: 1px solid black; 
+      position: absolute;       ;
+      top: 0;
+      right: 0; 
+  }
+
+  .error-msg{
+      color: red;
+  }

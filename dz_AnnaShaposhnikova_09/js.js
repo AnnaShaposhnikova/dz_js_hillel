@@ -62,8 +62,7 @@ function clearForm(){
 }
 
 function getValueAndTrim(element){
-  let trimmedValue = element.value.trim();
-  return trimmedValue;
+ return  trimmedValue = element.value.trim();  
 }
 
 function createElement(title, container, tag){  
