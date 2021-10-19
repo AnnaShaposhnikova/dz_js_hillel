@@ -1,0 +1,50 @@
+@media screen and (min-width: 720px){
+    .tab-label{
+        display: block;
+    }
+}
+
+.tab-container{
+    background-color: lightseagreen;
+    border: 1px solid gray;
+    width: 95%;
+    height: 30%;
+    padding:2%;
+
+}
+
+.tab-label{
+    width: 10%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    
+}
+.tab-content{
+    padding-left: 2%;
+    display: inline-flex;
+    overflow: hidden;
+}
+.tab-active{
+    font-weight: bold;
+}
+
+.content-active {
+    /* -webkit-animation-direction:reverse;
+    -moz-animation-direction:reverse;
+    animation-direction: reverse;
+    animation: move; */
+}
+/*   
+@keyframes move {    
+    from { left: 0; }
+    to { left: 100%; }       
+   } */
+
+.content-hidden{
+    display: none;
+
+}
+
