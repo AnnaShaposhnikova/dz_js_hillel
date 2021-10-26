@@ -1,0 +1,18 @@
+.input, #btn, #list{
+    margin: 10px;
+    font-size: 18px;
+}
+input{
+    margin-left: 25px;
+    font-size: 18px;
+}
+#btn{
+   background-color: rgb(104, 145, 223);
+   border-radius: 10px;
+   height: 2em;
+   width: 4em;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
