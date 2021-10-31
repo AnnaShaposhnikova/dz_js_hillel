@@ -20,65 +20,38 @@ const Astronauts = [
 ];
 
 const arrOfPreparedAstronauts = [];
-const arrOfLoosers = []; 
+const arrOfLoosers = [];
 
 function astroRace(astronauts) {
-  debugger
-    const arrOfNotPreparedAstronaut = []; 
-    const arrOfPromises = [];
+  // debugger
 
-  astronauts.forEach((astro) => {
-    const p = trainAstro(astro);
+  const arrOfPromises = [];
+
+  astronauts.forEach((astro, index) => {
+    const p = trainingAstro(astro, index);
     arrOfPromises.push(p);
   });
 
-  Promise.allSettled(arrOfPromises).then((results) => {
-  
-   console.log(results)
+  Promise.allSettled(arrOfPromises)
+    .then((results) => {
+      console.log(results);
 
-    results.forEach((result) => {
-    
-      if (result.status === "fulfilled" && result.value.result === "Our hero") {
-        const astro = result.value;
-        arrOfPreparedAstronauts.push(astro);
-      } else if(result.status === "rejected" ){ 
-                
-          const astro = result.reason;
-            if (astro.result === "Failed one") {
-                arrOfLoosers.push(astro);
-            } else {
-              if(astro.timeSpended < maxSpendedTime){
-                arrOfNotPreparedAstronaut.push(astro);  
-              }                         
-            }      
-        }
+      if (results.some((e) => e.status === "rejected")) {
+        throw new Error("One  is down....");
+      }
+
+      renderAstro(arrOfPreparedAstronauts, ".label-hr");
+  renderAstro(arrOfLoosers, ".label-loos");
     })
-  console.log("not prepared",arrOfNotPreparedAstronaut)
-    // astroRace(arrOfNotPreparedAstronaut); 
-
-    if (results.some((e) => e.status === 'rejected')) {
-      throw new Error('One  is down....');
-    }
-    
-    console.log("Heroes", arrOfPreparedAstronauts);
-    console.log("loosers", arrOfLoosers);
-  })
-  .catch((e) => {
-      console.log (e);    
-
- 
-//   console.log("Herros", arrOfPreparedAstronauts);
-//   console.log("loosers", arrOfLoosers);
-    })
+    .catch((e) => {
+      console.log(e);
+    });
 }
 
-function trainAstro(astro) {
+function trainingAstro(astro, index) {
   return new Promise((res, rej) => {
     setTimeout(() => {
-      
-        console.log('setTimeout')
-      if (Math.random() < 0.5) {
-         
+      if (Math.random() < 0.8) {
         astro.timeSpended += trainingTime;
         if (astro.timeSpended >= maxSpendedTime) {
           astro.result = "Failed one";
@@ -90,35 +63,44 @@ function trainAstro(astro) {
         res(astro);
       }
     }, trainingTime);
-  });
+  })
+    .then((astro) => {
+ 
+      console.log(astro, index);
+      if (astro.result === "Our hero") {
+          arrOfPreparedAstronauts.push(astro);
+          return astro;
+      }
+   
+   })
+   .catch((astro)=>{
+      if(astro.result === "Failed one"){
+        arrOfLoosers.push(astro);
+        return astro;
+      }
+      if (astro.timeSpended < maxSpendedTime) {
+        return trainingAstro(astro, index);
+      }
+   })  
 }
 
-function renderAstro(arrOfAstro, classOflabel){
-  
+function renderAstro(arrOfAstro, classOflabel) {
   const labelHr = document.querySelector(classOflabel);
   const container = labelHr.nextElementSibling;
-  arrOfAstro.forEach((astro) =>{
-    
-    const contentHr = document.createElement('div');
-    contentHr.classList.add('content');
-    const name = document.createElement('div');
-    name.classList.add('content-name');
+  arrOfAstro.forEach((astro) => {
+    const contentHr = document.createElement("div");
+    contentHr.classList.add("content");
+    const name = document.createElement("div");
+    name.classList.add("content-name");
     name.textContent = astro.first_name;
     contentHr.append(name);
-    const time = document.createElement('div');
-    time.classList.add('content-time');
+    const time = document.createElement("div");
+    time.classList.add("content-time");
     time.textContent = astro.timeSpended;
     contentHr.append(time);
     container.append(contentHr);
-  })  
+  });
 }
 
-
 astroRace(Astronauts);
-setTimeout(() => {
-    renderAstro(arrOfPreparedAstronauts,'.label-hr' );
-    renderAstro(arrOfLoosers,'.label-loos' );
-  
-}, 2000);
-
 
