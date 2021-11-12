@@ -46,13 +46,10 @@ httpService
     userContainer$.append(div$);
   });
 
-userContainer$.on("click", onBtnClick);
+userContainer$.on("click",".btn", onBtnClick);
 
 function onBtnClick(e) {
   const targetElement$ = $(e.target);
-  if (!targetElement$.hasClass("btn")) {
-    return;
-  }
   postContainer$.empty();
   const userId = targetElement$.parent().attr("data-id");
   // console.log(userId)
