@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-direction: row;
+  }
+  h4 {
+    text-align: center;
+    font-size: 20px;
+  }
+  .users
+  {
+    width: 100%;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    border: 1px solid black;
+  }
+  .user-header{
+    display:inline-flex;
+    border:1px solid black;
+    height: 30px;
+    justify-content: center;
+  }
+  .user-create{
+    margin:5px;
+  }
+  
+  .button {
+    background-color: rgb(38, 80, 218);
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 25px;
+    display: inline-flex;
+    text-align: center;
+    margin: 20px 0 20px 0;
+}  
+    .create-user-container{
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    display:none;   
+  }
+
+  .save-button{
+    background-color: rgb(136, 235, 106);
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 10px 5px;
+  }
+  .id{
+    width: 5%;
+    
+  }
+  .name, .username, .email{
+    width:17%; 
+  }  
+
+  .street, .city{
+    width:15%
+  }
+
+  .row{
+    border: 1px solid black;
+    /* padding:5px 0; */
+    
+  }
+  .btn-update, .btn-create{
+    
+  }
+  .error-msg, .enternet-error{
+    color: red;
+
+}
+
+  
+
