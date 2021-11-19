@@ -7,7 +7,7 @@ class HTTPService {
       return axios.post(`${HTTPService.API}${url}`,data);
     }
     put(url, data = null){
-      return axios.put(`${HTTPService.API}${url}${data}`);
+      return axios.put(`${HTTPService.API}${url}${data.id}`,data);
     }
     delete(url, data = null){
       return axios.delete(`${HTTPService.API}${url}${data}`);

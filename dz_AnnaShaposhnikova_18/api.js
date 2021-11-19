@@ -4,12 +4,12 @@ const btnSaveUser$ = $(".save-button");
 const createUserContainer$ = $(".create-user-container");
 const updateHeader$ = $("#update");
 const createHeader$ = $("#create");
-const enternetErrorContainer$ = $(".enternet-error")
+const enternetErrorContainer$ = $(".enternet-error");
 const ERROR_MSG = {
   empty: "Field is required",
-  enternetConnection: "TYDYSHCH!!!!Please, check your internet connection and try again"
+  enternetConnection:
+    "TYDYSHCH!!!!Please, check your internet connection and try again",
 };
-
 
 const ID_NAME = "#name";
 const ID_USERNAME = "#username";
@@ -31,9 +31,9 @@ function getUsers() {
   return httpService
     .get(ENVORINMENT.Users.getUsers)
     .then((r) => Promise.resolve(r.data))
-    .catch((e)=>{
-        showEnternetError();
-    })
+    .catch((e) => {
+      showEnternetError();
+    });
 }
 
 btnCreateUser$.on("click", onBtnClick);
@@ -47,40 +47,66 @@ function onBtnClick(e) {
   createUserContainer$.show();
 }
 function onBtnSaveClick(e) {
-    createUpdateUser();
+  const newUser = getFormData();
+  if (!newUser) {
+    return;
+  }
+  if (!createUserContainer$.attr("data-id")) {
+    saveNewUser(newUser).then((user) => {
+      renderOneUser(user);
+    });
+  } else {
+    userId = createUserContainer$.attr("data-id");
+    newUser.id = userId;
+    updateUser(newUser);
+  }
+
+  clearInputValue();
+  createUserContainer$.hide();
 }
 
 function onBtnUpdateClick(e) {
-  createUserContainer$.show();  
+  createUserContainer$.show();
   createHeader$.hide();
-  const userId = getUserID(e); 
-  createUserContainer$.attr("data-id",userId);
-  
-  getUser(userId).then((user)=>{      
-      setInputData(ID_NAME,user.name);
-      setInputData(ID_USERNAME,user.username);
-      setInputData(ID_EMAIL,user.email);
-      setInputData(ID_STREET,user.address.street);
-      setInputData(ID_CITY,user.address.city);      
-  })
+  const userId = getUserID(e);
+  createUserContainer$.attr("data-id", userId);
+
+  getUser(userId).then((user) => {
+    setInputData(ID_NAME, user.name);
+    setInputData(ID_USERNAME, user.username);
+    setInputData(ID_EMAIL, user.email);
+    setInputData(ID_STREET, user.address.street);
+    setInputData(ID_CITY, user.address.city);
+  });
+  clearInputValue();
 }
 
 function onBtnDeleteClick(e) {
-  const userId = getUserID(e); 
+  const userId = getUserID(e);
   deleteUser(userId);
 }
 
 function renderOneUser(user) {
   const row$ = createElement("div", "", "row");
+  row$.attr("data-id", user.id);
+  const rowWithData = renderUserToRow(user, row$);
+  userContainer$.append(rowWithData);
+}
+
+function renderUserToRow(user, row$) {
   const id$ = createElement("div", user.id, "user-header id");
   const name$ = createElement("div", user.name, "user-header name");
   const username$ = createElement("div", user.username, "user-header username");
   const email$ = createElement("div", user.email, "user-header email");
-  const street$ = createElement("div", user.address.street, "user-header street"  );
+  const street$ = createElement(
+    "div",
+    user.address.street,
+    "user-header street"
+  );
   const city$ = createElement("div", user.address.city, "user-header city");
   const btnUpdate = createElement("button", "Update", "btn-update");
   const btnDelete = createElement("button", "Delete", "btn-delete");
-  row$.attr("data-id", user.id);
+
   row$.append(id$);
   row$.append(name$);
   row$.append(username$);
@@ -89,20 +115,21 @@ function renderOneUser(user) {
   row$.append(city$);
   row$.append(btnUpdate);
   row$.append(btnDelete);
-  userContainer$.append(row$);
+  console.log(row$);
+  return row$;
 }
 
 function createElement(tag, data = "", className = "") {
-    return $(`<${tag} class='${className}'>${data}</${tag}>`);
+  return $(`<${tag} class='${className}'>${data}</${tag}>`);
 }
 
 function getInputData(idOfElement) {
   const element = $(idOfElement);
   return element.val().trim();
 }
-function setInputData(idOfElement, value){
-    const element = $(idOfElement);
-    element.val(value);
+function setInputData(idOfElement, value) {
+  const element = $(idOfElement);
+  element.val(value);
 }
 
 function validateData(value, id) {
@@ -120,14 +147,12 @@ function validateData(value, id) {
 }
 
 function saveNewUser(user) {
-  return (
-    httpService
-      .post(ENVORINMENT.Users.createUser, user)
-      .then((r) => Promise.resolve(r.data))
-      .catch((e) => {
-        showEnternetError();
-      })
-  );
+  return httpService
+    .post(ENVORINMENT.Users.createUser, user)
+    .then((r) => Promise.resolve(r.data))
+    .catch((e) => {
+      showEnternetError();
+    });
 }
 
 function clearInputValue() {
@@ -143,99 +168,83 @@ function clearInputValue() {
   city$.val("");
 }
 
- function updateUser(id){   
-     return httpService
-     .put(ENVORINMENT.Users.updateUser, id)
-     .then((r) => Promise.resolve(r.data))
-     .then((user)=>{
-         console.log(user)
-        setTimeout(()=>{
-            
-        },500)
-     })
-     .catch((e)=>{
-        showEnternetError();
-        })
- }
+function updateUser(user) {
+  const id = user.id;
+  return httpService
+    .put(ENVORINMENT.Users.putUser, user)
+    .then((r) => Promise.resolve(r.data))
+    .then((user) => {
+      const userRow = userContainer$.find(`.row[data-id="${user.id}"]`);
+      userRow.empty();
+      const newRow = renderUserToRow(user, userRow);
+    })
+    .catch((e) => {
+      showEnternetError();
+    });
+}
 
 function getUser(id) {
-     return httpService
-     .get(ENVORINMENT.Users.getUsers, id)
-     .then((r) => Promise.resolve(r.data))
-     .catch((e)=>{
-       showEnternetError();
-        })
+  return httpService
+    .get(ENVORINMENT.Users.getUsers, id)
+    .then((r) => Promise.resolve(r.data))
+    .catch((e) => {
+      showEnternetError();
+    });
 }
 
-function deleteUser(id) { 
-    return httpService
+function deleteUser(id) {
+  return httpService
     .delete(ENVORINMENT.Users.deleteUser, id)
     .then((r) => Promise.resolve(r.data))
-    .then((user)=>{
-        setTimeout(()=>{
-            removeElement(id);
-        },500)
+    .then((user) => {
+      setTimeout(() => {
+        removeElement(id);
+      }, 500);
     })
-    .catch((e)=>{
-        showEnternetError();
-    })
+    .catch((e) => {
+      showEnternetError();
+    });
 }
 
-function showEnternetError(){
-    let div$ = $(
-        `<div>${ERROR_MSG.enternetConnection}</div>`
-      );
-    enternetErrorContainer$.append(div$);
+function showEnternetError() {
+  let div$ = $(`<div>${ERROR_MSG.enternetConnection}</div>`);
+  enternetErrorContainer$.append(div$);
 }
 
-function getUserID(e){
-    const targetElement$ = $(e.target);
-    return targetElement$.parent().attr("data-id");
+function getUserID(e) {
+  const targetElement$ = $(e.target);
+  return targetElement$.parent().attr("data-id");
 }
 
-function removeElement(id){
-    userContainer$.find(`.row[data-id="${id}"]`).remove();
-}
-function createUpdateUser(){
-    const nameVal = getInputData(ID_NAME);
-    const usernameVal = getInputData(ID_USERNAME);
-    const emailVal = getInputData(ID_EMAIL);
-    const streetVal = getInputData(ID_STREET);
-    const cityVal = getInputData(ID_CITY);
-    const errors = [];
-    errors.push(validateData(nameVal, ID_NAME));
-    errors.push(validateData(usernameVal, ID_USERNAME));
-    errors.push(validateData(emailVal, ID_EMAIL));
-    errors.push(validateData(streetVal, ID_STREET));
-    errors.push(validateData(cityVal, ID_CITY));
-    const isError = errors.includes(false);
-  
-    if (isError) {
-      e.preventDefault();
-      return;
-    }
-  
-    const newUser = {
-      name: nameVal,
-      username: usernameVal,
-      email: emailVal,
-      address: {
-        street: streetVal,
-        city: cityVal,
-      },
-    };
-  
-    if(!createUserContainer$.attr("data-id")){
-      saveNewUser(newUser).then((user) => {
-          renderOneUser(user);
-    }); 
-    }else{
-      userId = createUserContainer$.attr("data-id");    
-      updateUser(userId);
-    }
-  
-    clearInputValue();
-    createUserContainer$.hide();
+function removeElement(id) {
+  userContainer$.find(`.row[data-id="${id}"]`).remove();
 }
 
+function getFormData() {
+  const nameVal = getInputData(ID_NAME);
+  const usernameVal = getInputData(ID_USERNAME);
+  const emailVal = getInputData(ID_EMAIL);
+  const streetVal = getInputData(ID_STREET);
+  const cityVal = getInputData(ID_CITY);
+  const errors = [];
+  errors.push(validateData(nameVal, ID_NAME));
+  errors.push(validateData(usernameVal, ID_USERNAME));
+  errors.push(validateData(emailVal, ID_EMAIL));
+  errors.push(validateData(streetVal, ID_STREET));
+  errors.push(validateData(cityVal, ID_CITY));
+  const isError = errors.includes(false);
 
+  if (isError) {
+    return false;
+  }
+
+  return {
+    name: nameVal,
+    username: usernameVal,
+    email: emailVal,
+    address: {
+      street: streetVal,
+      city: cityVal,
+    },
+  };
+}

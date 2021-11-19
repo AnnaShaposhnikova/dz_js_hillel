@@ -2,7 +2,7 @@ const ENVORINMENT = {
     Users: {
       getUsers: "/users/",      
       createUser:"/users/",
-      updateUser:"/users/",
+      putUser:"/users/",
       deleteUser:"/users/"
     },
  
