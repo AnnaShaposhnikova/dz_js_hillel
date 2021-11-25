@@ -1,0 +1,67 @@
+@media screen and (max-width: 567px) {
+  .row {
+    width: 90%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .row {
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.container {
+  display: flex;
+}
+.row {
+  justify-content: center;
+  border-radius: 10px;
+  width: 40%;
+  background-color: rgb(199, 241, 183);  
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+form {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+button {
+  width: 150px;
+  height: 150%;
+  background-color: rgb(60, 190, 28);
+  font-size: 20px;
+}
+button:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+input {
+  width: 70%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  font-size: 20px;  
+}
+h3{
+  text-align: center;
+}
+
+input,
+button{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 5%;
+}
+body {
+  background-image: url("./wall123.jpg");
+  background-repeat: repeat;
+  font-size: 20px;
+}
+.error-msg{
+  color:red;
+}
