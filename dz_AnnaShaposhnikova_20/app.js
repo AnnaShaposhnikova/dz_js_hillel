@@ -34,7 +34,7 @@ function onSubmitClick(e) {
         //   return response.json();
       })
       .catch((error) => {
-        row$.hide();
+       
         errorConnectionEl$.text(ERROR_MSG.internetConnection);
       });
   }
