@@ -1,0 +1,22 @@
+{
+  "name": "dz_annashaposhnikova_21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "build":"gulp build",
+    "serve":"gulp serve"
+  },
+  "author": "Anna",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-cli": "^2.3.0",
+    "gulp-concat": "^2.6.1"
+  }
+}

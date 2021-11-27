@@ -1,14 +1,9 @@
-//Ссылка на инструкцию по джейсон плейсхолдеру. https://jsonplaceholder.typicode.com/guide/
-
-//Там нас будет интересовать все но главное - фильтрация при помощи квери стринга
-
-// Получаем всех пользователей https://jsonplaceholder.typicode.com/posts
-//Выводим имя пользователя на UI (колонка слева)и рядом с ним кнопку Show posts
-// При нажатии на кнопку, делаем запрос на этот ендпоинт https://jsonplaceholder.typicode.com/posts?userId="ID"
-//Получаем все посты пользователя и выводим их на UI(блок располагаем справа от пользователей) Выводим тайтл и бади
-
-const userContainer$ = $("#usersContainer");
-const postContainer$ = $("#postsContainer");
+class HTTPService {
+  static API = "https://jsonplaceholder.typicode.com";
+  get(url, data = '') {   
+      return axios.get(`${HTTPService.API}${url}${data}`);    
+  }
+}
 
 const ENVORINMENT = {
   Users: {
@@ -19,12 +14,10 @@ const ENVORINMENT = {
   },
 };
 
-class HTTPService {
-  static API = "https://jsonplaceholder.typicode.com";
-  get(url, data = '') {   
-      return axios.get(`${HTTPService.API}${url}${data}`);    
-  }
-}
+
+
+const userContainer$ = $("#usersContainer");
+const postContainer$ = $("#postsContainer");
 
 const httpService = new HTTPService();
 
