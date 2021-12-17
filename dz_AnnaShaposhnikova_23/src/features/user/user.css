@@ -1,0 +1,12 @@
+#create-user{
+/* 
+    margin-top:5% */
+  
+}
+label, button, input{
+    display: block;
+    margin-top:20px;
+}
+.error{
+   color:red;
+}

@@ -1,0 +1,34 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+#main-container {
+  min-height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  height: 10%;
+  width: 100%;
+  background-color: lightgreen;
+}
+.footer {
+  height: 20%;
+  width: 100%;
+  background-color: lightgrey;
+}
+a{
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  
+ 
+  top:50%;
+  padding: 10px;
+  
+
+}
