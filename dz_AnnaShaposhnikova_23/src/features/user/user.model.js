@@ -54,6 +54,10 @@ export default class UserModel{
         console.log(users);
     }
 
+    geetUsers() {
+      return Promise.resolve(users)
+    }
+
 }
 
 

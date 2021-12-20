@@ -1,0 +1,19 @@
+.acc-container{
+    background-color: lightpink; 
+}
+.acc-header{
+    background-color: lightgreen;
+    border: 1px solid #606060;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.acc-body{
+    background-color: lightyellow;
+    border: 1px solid #606060;
+    display: none;
+ 
+}
+.acc-show{
+    display: block;
+}
