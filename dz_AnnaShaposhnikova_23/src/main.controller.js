@@ -3,7 +3,7 @@ import $ from "jquery";
 import login from "./features/login/login.controller";
 import user from "./features/user/user.controller";
 import layout from "./core/layout/layout.controller";
-import chat from "./features/chat/chat.controller"
+import chat from "./features/chat/chat.controller";
 
 export default class MainController {
     constructor($el) {
@@ -15,7 +15,9 @@ export default class MainController {
             onUser: () => this.useUser(),
             onChat: () => this.useChat(),
         });
-        this.userController = new user(this.$root);
+        this.userController = new user(this.$root, {
+            onSubmit: () => this.useChat(),
+        });
 
         this.chatController = new chat(this.$root);
 
@@ -25,6 +27,7 @@ export default class MainController {
     useLogin() {
         this.loginController.init();
     }
+
     userLogon() {
         this.clearRoot();
         this.layoutController.init();

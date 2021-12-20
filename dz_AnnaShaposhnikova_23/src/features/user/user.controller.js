@@ -3,25 +3,22 @@ import userModel from "./user.model";
 
 import("./user.css");
 
-export default class UserController{
-    constructor($el){
+export default class UserController {
+    constructor($el, options) {
         this.$container = $el;
-       
-        this.view = new userView({ getUser: (userName) => this.getUser(userName) });
+        this.options = options;
+
+        this.view = new userView({
+            getUser: (userName) => this.getUser(userName),
+        });
     }
-    init() {       
-        this.view.renderUserForm(this.$container);        
-      }
+    init() {
+        this.view.renderUserForm(this.$container);
+    }
 
-      getUser(userName){
-          const model = new userModel();
-          model.saveUser(userName);
-
-      }
-     
-
-
-
-
-
+    getUser(userName) {
+        const model = new userModel();
+        model.saveUser(userName);
+        this.options.onSubmit();
+    }
 }
