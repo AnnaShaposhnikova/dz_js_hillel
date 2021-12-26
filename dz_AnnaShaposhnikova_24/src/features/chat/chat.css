@@ -1,0 +1,97 @@
+#chat{
+    display: flex;
+    width: 100%;
+    height:100%;
+    background-color: aqua; 
+    
+ }
+
+.sidebar-users{
+width:30%;
+background-color: azure;
+ display: flex;
+flex-direction: column;
+}
+
+ .chat-body{
+width:70%;
+ display: flex;
+flex-direction: column;
+
+ }
+.chat{
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+
+ }
+ .chat-footer{  
+     display: flex;    
+     width: 100%;
+     height: 15%;
+     background-color: aqua;
+ }
+ .chat-btn{
+     cursor: pointer;
+     width: 20%;
+     height: 100%;
+     background-color: brown;
+    font-size: calc(1vw + 1vh);
+    font-weight: bold;
+   margin: 0;
+   padding: 0;  
+ }
+
+ .chat-text{
+     width: 80%;
+     height: 100%;
+    box-sizing: border-box;
+       margin: 0;
+   padding: 0;
+ }
+.msg-container{
+    background-color: rgb(106, 250, 106);
+    width: 50%;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.left{
+    align-self: flex-start;
+    background-color: lightsalmon;
+}
+
+.right{
+    align-self: flex-end;
+}
+
+ .msg-header{
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .msg-date{
+     font-size: 10px;
+     background-color: cornsilk;     
+ }
+
+ .sender-name{
+     font-size: 12px;
+     font-weight: bold; 
+     cursor: pointer;    
+ }
+
+ .msg-body{
+     background-color:rgb(197, 248, 197);
+     border-radius: 0px, 5px, 0px, 5px;
+ }
+
+ .user{
+     display: flex;
+     flex-direction: column;
+     margin:10px;
+     cursor: pointer;
+ }
