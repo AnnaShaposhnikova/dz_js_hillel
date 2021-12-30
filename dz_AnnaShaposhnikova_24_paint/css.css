@@ -1,13 +1,3 @@
-@media only screen and (max-width: 450px){
-    #palette {
-      
-    width: 40%;
-}
-#canvas {
-    width: 60%;
-}
-
-}
 body {
     margin: 0;
     padding: 0;
@@ -24,19 +14,18 @@ body {
 #palette {
     width: 20%;
     background-color: blanchedalmond;
-}
-#canvas {
-    width: 80%;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 #palette,
 #canvas {
     border: 2px solid black;
-    height: 100%;
     cursor: default;
-    box-sizing: border-box;
 }
-#tools, input, .buttonSize{
+#tools,
+input,
+.buttonSize {
     box-sizing: border-box;
 }
 
@@ -62,9 +51,10 @@ body {
     background-color: black;
 }
 
-#clean, #rubber {
+#clean,
+#rubber {
     padding: 10px;
-     display: inline-block;
+    display: inline-block;
     text-align: center;
     margin: 10px;
     cursor: pointer;
@@ -72,10 +62,10 @@ body {
     border-radius: 5px;
     background-color: rgb(147, 166, 172);
 }
-#clean{
-box-sizing: border-box;
+#clean {
+    box-sizing: border-box;
 }
-#clean:hover, #rubber:hover {
+#clean:hover,
+#rubber:hover {
     box-shadow: 10px 5px 5px rgb(175, 175, 175);
 }
-

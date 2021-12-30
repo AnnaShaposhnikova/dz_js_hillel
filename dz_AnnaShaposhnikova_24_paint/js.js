@@ -18,6 +18,9 @@ const blue = document.querySelector("#blue");
 const black = document.querySelector("#black");
 const rubber = document.querySelector("#rubber");
 
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+
 // переменные для рисования
 context.lineCap = "round";
 context.lineWidth = 5;
@@ -26,7 +29,6 @@ generatePalette();
 clean.addEventListener("click", cleanCanvas);
 canvas.addEventListener("mousemove", onMouseMove);
 colors.addEventListener("click", onColorClick);
-
 size.addEventListener("change", sizeChange);
 rubber.addEventListener("click", useRubber);
 
@@ -48,7 +50,8 @@ function cleanCanvas() {
 }
 
 function onColorClick(e) {
-    console.log(e.target.style.backgroundColor);
+    context.lineWidth = this.value;
+    context.globalCompositeOperation = "source-over";
     context.strokeStyle = e.target.style.backgroundColor;
 }
 
@@ -68,7 +71,6 @@ function onMouseMove(e) {
 }
 
 function useRubber(e) {
-    onMouseMove(e);
     context.globalCompositeOperation = "destination-out";
     context.lineWidth = 30;
 }
