@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Paint</title>
+        <link href="./css.css" rel="stylesheet" />
+        <script src="js.js" defer></script>
+    </head>
+    <body>
+        <div id="root">
+            <div id="palette">
+                <div id="colors">
+                    <div class="color-item" id="yellow"></div>
+                    <div class="color-item" id="green"></div>
+                    <div class="color-item" id="red"></div>
+                    <div class="color-item" id="blue"></div>
+                    <div class="color-item" id="black"></div>
+                </div>
+                <div id="tools">
+                    <div class="buttonSize">
+                        <h3>Size (<span id="showSize">5</span>)</h3>
+                        <input
+                            type="range"
+                            min="1"
+                            max="30"
+                            value="5"
+                            step="1"
+                            id="controlSize"
+                        />
+                    </div>
+                    <button id="rubber" >Rubber</button>
+                </div>
+                <div id="clean">Clean</div>
+            </div>
+            <canvas id="canvas"></canvas>
+        </div>
+    </body>
+</html>
