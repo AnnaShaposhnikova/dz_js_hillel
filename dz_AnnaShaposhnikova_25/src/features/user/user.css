@@ -1,0 +1,33 @@
+#create-user {
+    background-color: rgb(185, 243, 243);
+}
+label,
+button,
+input {
+    display: block;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.error {
+    color: red;
+}
+input {
+    box-sizing: border-box;
+    width: 75%;
+}
+
+button {
+    width: 75%;
+}
+#create-user {
+    min-height: 30%;   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
