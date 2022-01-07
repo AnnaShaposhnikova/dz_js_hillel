@@ -1,12 +1,38 @@
 import $, { htmlPrefilter } from "jquery";
 import html from "./login.html";
+import UserModel from "../user/user.model";
+import Schema from "validate";
+
+
+const userForm = new Schema({
+    firstName: {
+        type: String,
+        required: true,
+        length: { min: 3, max: 32 },          
+        message: {
+            type: "First name must be a string.",
+            required: "First name is required.",
+            length: "First name must be from 3 to 32 symbols",
+           
+        },
+    },
+
+    password: {
+        required: true,
+        length: { min: 8 },
+        message: {
+            required: "Password is required.",
+            length: "Password length must be more than 8  symbols",
+        },
+    },
+});
 
 export default class LoginView {
     constructor(options) {
         this.options = options;
     }
 
-    ERROR_MSG = "Field is requared";
+   UserModel = new  UserModel();
 
     renderLoginForm($contrainer) {
         const $form = this.createForm();
@@ -17,21 +43,61 @@ export default class LoginView {
         $("#login-btn").on("click", this.onClick);
     }
 
-    onClick = () => {
+    onClick = async () => {
         const $loginEl = $("#login");
-
+        const $passwordEl = $("#password");
         const $loginVal = $loginEl.val();
-        if (!$loginVal) {
-            const $error = $(".error").text(this.ERROR_MSG);
-            return;
+        const $passwordVal = $passwordEl.val();
+
+        const errors = userForm.validate({
+            firstName: $loginVal,
+            password: $passwordVal,
+        });
+     
+
+        console.log(await this.UserModel.isUserNameExists($loginVal));
+
+         if (
+             $loginVal &&
+             !await this.UserModel.isUserNameExists($loginVal)
+         ) {
+             errors.push({
+                 path: "firstName",
+                 message: "User does not exist",
+             });
+         } 
+
+        if($passwordVal && !await this.UserModel.isPasswordExists($loginVal, $passwordVal)){
+              errors.push({
+                  path: "password",
+                  message: "Password is not correct",
+              });
         }
+        
+        console.log(errors);
+
         $(".error").empty();
+        if (errors.length > 0) {
+            errors.forEach((error) => {
+                $(`.${error.path}`).text(`${error.message}`);
+            });  
+        
+       
+
+         console.log(errors);
+        
+        
+        return;
+        }       
 
         $loginEl.val("");
-
+        $passwordEl.val("");
         this.options.login();
     };
     createForm() {
         return html;
     }
+
+  
+
 }

@@ -33,8 +33,15 @@ export default class UserView {
             const $error = $(".error").text(this.ERROR_MSG);
             return;
         }
+        const newUserObj = {
+            firstName: $firstNameVal,
+            lastName: "asd",
+            type: "consumer",
+        }
+
         $(".error").empty();
-        this.options.getUser($firstNameVal);
+        this.options.getUser(newUserObj);
         $firstNameEl.val("");
     };
+    
 }

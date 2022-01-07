@@ -1,9 +1,11 @@
 export default   {
     Users: {
       getUsers: "/users/",      
-      createUser:"/user/",
+      createUser:"/users/",
       // putUser:"/users/",
-      // deleteUser:"/users/"
+      // deleteUser:"/users/",
+      login: "/login/",
+
     },
  
   };

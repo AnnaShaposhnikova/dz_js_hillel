@@ -9,16 +9,16 @@ export default class UserController {
         this.options = options;
 
         this.view = new userView({
-            getUser: (userName) => this.getUser(userName),
+            getUser: (userObj) => this.getUser(userObj),
         });
     }
     init() {
         this.view.renderUserForm(this.$container);
     }
 
-    getUser(userName) {
+    getUser(userObj) {
         const model = new userModel();
-        model.saveUser(userName);
+        model.saveUser(userObj);
         this.options.onSubmit();
     }
 }

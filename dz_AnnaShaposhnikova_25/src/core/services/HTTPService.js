@@ -8,10 +8,17 @@ export default class HTTPService {
     }
 
     post(url, data = null) {
-        return fetch(`${HTTPService.API}${url}`, data)
-        .then((response) => response.json())
-        .then((response) => console.log(response));
+        return fetch(`${HTTPService.API}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json());
     }
+    //
+    // .then((response) => console.log(response));
 
     put(url, data = null) {
         return fetch(`${HTTPService.API}${url}${data.id}`, data);
@@ -20,4 +27,18 @@ export default class HTTPService {
     delete(url, data = null) {
         return fetch(`${HTTPService.API}${url}${data}`);
     }
+
+    login(url, data = null){
+              return fetch(`${HTTPService.API}${url}${data.id}`, {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+              })
+              .then((response) => response.json())
+              .then((r) => console.log("token", r))
+    }
+
+    
 }

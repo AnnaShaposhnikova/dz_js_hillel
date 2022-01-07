@@ -41,11 +41,11 @@ let users = [
 ];
 
 export default class UserModel {
-     httpService = new HTTPService();
+    httpService = new HTTPService();
 
-    saveUser(user){
+    saveUser(user) {
         // return HTTPService.post(enviorontment.Users.createUser);
-        return this.httpService.post(enviorontment.Users.createUser,user);
+        return this.httpService.post(enviorontment.Users.createUser, user);
     }
     // saveUser(userName) {
     //     const lastUserInArray = users[users.length - 1];
@@ -60,10 +60,24 @@ export default class UserModel {
     //     users.push(newUserObject);
     // }
 
-    getUsers() {
-        // return Promise.resolve(users);
-        // const httpService = new HTTPService();
-        return this.httpService.get(enviorontment.Users.getUsers);     
+    getUsers() {       
+        return this.httpService.get(enviorontment.Users.getUsers);
+    }
 
+    isUserNameExists(userName){
+         return this.getUsers() 
+        //  .then((users)=> console.log(users))      
+          .then((users) => users.find((user) => user.firstName === userName));
+
+    }
+
+    isPasswordExists(userName, userId){  //id из базы
+        return this.getUsers()
+        .then((users) => users.find((user) => (user.firstName === userName)&& (user._id === userId))
+        );
+    }
+
+    getToken(user) {
+        return this.httpService.login(enviorontment.Users.login)  
     }
 }

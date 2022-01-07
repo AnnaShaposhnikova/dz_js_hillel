@@ -1,9 +1,7 @@
-let currentUser =     {
-        userId: 1,
-        senderName: "Bob",
-        text: "Some message text",
-        sendDate: new Date(),
-    };
+// let currentUser =     {
+//         userId: "58b1836b588b4679bf50821695585b77",
+        
+//     };
 
 let messages = [
     {
