@@ -74,19 +74,17 @@ export default class LoginView {
               });
         }
         
-        console.log(errors);
+        // console.log(errors);
+
+        sessionStorage.setItem("currentUser", "");
+        const currentUser = await this.UserModel.isUserNameExists($loginVal);
+        sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
 
         $(".error").empty();
         if (errors.length > 0) {
             errors.forEach((error) => {
                 $(`.${error.path}`).text(`${error.message}`);
-            });  
-        
-       
-
-         console.log(errors);
-        
-        
+            });             
         return;
         }       
 

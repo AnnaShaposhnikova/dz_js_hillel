@@ -2,11 +2,12 @@ import html from "./chat.html";
 // import msg from "./message.html"
 import $ from "jquery";
 import moment from "moment";
-import UserModel from "../user/user.model";
+import ChatModel from "../chat/chat.model";
 
 export default class ChatView {
     constructor(options) {
         this.options = options;
+        this.ChatModel = new ChatModel();
     }
 
     renderChatForm($contrainer) {
@@ -20,7 +21,11 @@ export default class ChatView {
         return html;
     }
     createUserUI(user) {
-        return $(`<div class="user" id=${user.id}>${user.name || user.firstName}</div>`);
+        return $(
+            `<div class="user" id=${user.id}>${
+                user.name || user.firstName
+            }</div>`
+        );
     }
     createMessageUI(message) {
         return $(`
@@ -37,7 +42,7 @@ export default class ChatView {
     }
 
     renderUsers(users, $container) {
-        console.log(users)
+        // console.log(users)
         users.forEach((user) => {
             const containerForOneUser = this.createUserUI(user);
             $container.append(containerForOneUser);
@@ -47,9 +52,11 @@ export default class ChatView {
     renderMessages(messages, $container) {
         messages.forEach((message) => {
             const containerForOneMessage = this.createMessageUI(message);
-            const sideClassName =
+              const sideCLassName =
+                  currentUserId === msg.postedByUser._id ? "right" : "left";
+            // const sideClassName =
                 // currentUser.id === message.id ? "left" : "right";
-                Math.random() > 0.5 ? "left" : "right";
+                // Math.random() > 0.5 ? "left" : "right";
             containerForOneMessage.addClass(sideClassName);
             $container.append(containerForOneMessage);
         });
@@ -61,21 +68,27 @@ export default class ChatView {
         $("#user-link").on("click", this.onUserChatClick);
     }
 
-    onBtnChatClick = (e) => {
+   onBtnChatClick = async (e) => {
         const msgText = $(".chat-text").val();
         if (!msgText) {
             return;
         }
         const currentUser = this.options.getCurrentUser();
 
-        const msg = {
-            id: Math.random(),
-            userId: currentUser.id,
-            senderName: currentUser.senderName,
-            text: msgText,
-            sendDate: new Date(),
-        };
-       
+          const msg =JSON.stringify({
+              postedByUser: await this.ChatModel.getCurrentUser._id,
+              message: msgText,
+              chatRoomId: await this.ChatModel.getCurrentUser._id,
+          });
+          this.options.socketSend(msg);
+        // const msg = {
+        //     id: Math.random(),
+        //     userId: currentUser.id,
+        //     senderName: currentUser.senderName,
+        //     text: msgText,
+        //     sendDate: new Date(),
+        // };
+
         const containerForOneMessage = this.createMessageUI(msg);
         const sideClassName = currentUser.id === msg.id ? "left" : "right";
 
@@ -88,7 +101,9 @@ export default class ChatView {
 
     onUserChatClick = (e) => {
         const id = e.target.id;
-        const userModel = new UserModel();
-        const currentUser = userModel.getUsers().then((users)=>users.find((user) => user.id === id));            
+        // const userModel = new UserModel();
+        // const currentUser = userModel
+        //     .getUsers()
+        //     .then((users) => users.find((user) => user.id === id));
     };
 }

@@ -73,11 +73,11 @@ export default class UserModel {
 
     isPasswordExists(userName, userId){  //id из базы
         return this.getUsers()
-        .then((users) => users.find((user) => (user.firstName === userName)&& (user._id === userId))
+        .then((users) => users.find((user) => (user.firstName === userName) && (user._id === userId))
         );
     }
 
     getToken(user) {
-        return this.httpService.login(enviorontment.Users.login)  
+        return this.httpService.login(enviorontment.Users.login, user)  
     }
 }
